@@ -1,3 +1,6 @@
+html.simplify {
+  --border-radius: 0.5rem;
+}
 html.simplify::-webkit-scrollbar {
   width: 16px;
 }
@@ -58,7 +61,7 @@ html.simplify main {
   }
 }
 html.simplify main textarea {
-  transition: height 0s;
+  transition: all 0s;
 }
 html.simplify main textarea:not(:focus) {
   resize: none;
@@ -68,7 +71,7 @@ html.simplify main > .relative.mb-3:has(textarea) {
 }
 html.simplify main > .relative.mb-3:has(textarea):has(.z-10) {
   position: fixed;
-  z-index: 999;
+  z-index: 11;
   background: rgba(0, 0, 0, 0.5019607843);
   width: 100vw;
   height: 100vh;
@@ -80,6 +83,12 @@ html.simplify main > .relative.mb-3:has(textarea):has(.z-10) > .sticky {
   max-width: 600px;
   margin: 0 auto;
 }
+html.simplify main > .relative.mb-3:has(textarea):has(.z-10) > .sticky form .flex.items-center {
+  display: flex;
+}
+html.simplify main > .relative.mb-3:has(textarea) .sticky form .flex.items-center {
+  display: none;
+}
 html.simplify main img.image-aspect.object-cover {
   object-position: top left;
 }
@@ -88,15 +97,15 @@ html.simplify main .card .overflow-hidden.rounded-2xl:has(img.image-aspect.objec
 }
 html.simplify main .card {
   margin-bottom: 48px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   background-color: rgba(255, 255, 255, 0.5647058824);
-  box-shadow: 0 1px 2px rgba(70, 70, 70, 0.2);
+  box-shadow: 0 1px 3px rgba(70, 70, 70, 0.2);
   transition-duration: 0.3s;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 html.simplify main .card:hover {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   background-color: rgba(227, 227, 244, 0.4);
 }
 html.simplify main .card:has(.link-line) {
@@ -108,11 +117,15 @@ html.simplify main .card:has(.link-line) ~ div:has(> .card) .card {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
+html.simplify main .card + div:has(.z-10 textarea) {
+  margin-top: -48px;
+  margin-bottom: 48px;
+}
 html.simplify main .card:has(.link-line) + hr + a[href*=status], html.simplify main .card:has(.link-line) + div.relative + hr + a[href*=status] {
   margin-bottom: 48px;
   background-color: rgba(255, 255, 255, 0.5647058824);
-  box-shadow: rgba(70, 70, 70, 0.2) 0px 1px 2px;
-  border-radius: 0 0 16px 16px;
+  box-shadow: 0px 1px 3px rgba(70, 70, 70, 0.2);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 html.simplify main .card div.flex.justify-between:has(path[d^="M17.8004 9.72508C17.8004 7.80008"]) {
   transition: opacity 200ms ease-in-out;
@@ -121,7 +134,7 @@ html.simplify main .card div.flex.justify-between:has(path[d^="M17.8004 9.72508C
   opacity: 0.5;
 }
 html.simplify main.usingKeys .focusedCard {
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   box-shadow: 0 0 5px rgb(59, 130, 246);
 }
 html.simplify main hr {
