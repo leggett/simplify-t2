@@ -101,6 +101,11 @@ const make = (selector, ...args) => {
 
 // Simulate clicking on an element
 const clickOn = (element, withShift = false) => {
+  if (!element) {
+    report("clickOn failed - element not found.");
+    return false;
+  }
+
   const dispatchMouseEvent = (target, type) => {
     const event = new MouseEvent(type, {
       view: window,
@@ -115,7 +120,7 @@ const clickOn = (element, withShift = false) => {
   dispatchMouseEvent(element, "click");
   dispatchMouseEvent(element, "mouseup");
   dispatchMouseEvent(element, "mouseout");
-  report("Clicked on", element);
+  // report("Clicked on", element);
 };
 
 // Detect if the element is on screen
@@ -154,7 +159,6 @@ function handleKeydown(e) {
     const cancelButton = get("button[type='button']:has(+ button[type='submit'])");
 
     if (searchFocused) {
-      report("Esc pressed, in search");
       document.activeElement.blur();
       e.preventDefault();
       return;
@@ -175,25 +179,58 @@ function handleKeydown(e) {
   let composing = e.target.isContentEditable || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA";
   if (composing) return;
 
+  // Next post
   if (e.code === "KeyJ" && noModifierKey) {
     goNextPrev("next");
     e.preventDefault();
     return;
   }
+
+  // Previous post
   if (e.code === "KeyK" && noModifierKey) {
     goNextPrev("prev");
     e.preventDefault();
     return;
   }
 
+  // Compose new post
   if (e.code === "KeyC" && noModifierKey) {
     newPost();
     e.preventDefault();
     return;
   }
 
+  // Open and focus search
   if (e.code === "Slash" && noModifierKey) {
     get("aside input[enterkeyhint]").focus();
+    e.preventDefault();
+    return;
+  }
+
+  // Like focused post
+  if (e.code === "KeyL" && noModifierKey) {
+    clickOn(get(".focusedCard button:has(path[d^='M5.65769 2.0083C3.58269'])"));
+    e.preventDefault();
+    return;
+  }
+
+  // Reply to focused message
+  if (e.code === "Enter" && noModifierKey) {
+    clickOn(get(".focusedCard button:has(path[d^='M17.8004 9.72508C17'])"));
+    e.preventDefault();
+    return;
+  }
+
+  // Repost focused message
+  if (e.code === "KeyR" && noModifierKey) {
+    clickOn(get(".focusedCard li button:has(path[d^='M12.0499 8.14987L15'])"));
+    e.preventDefault();
+    return;
+  }
+
+  // Repost focused message
+  if (e.code === "KeyQ" && noModifierKey) {
+    clickOn(get(".focusedCard li button:has(path[d^='M17.7083 17.5833H12'])"));
     e.preventDefault();
     return;
   }
