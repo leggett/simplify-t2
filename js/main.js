@@ -137,7 +137,7 @@ const elementInView = (el, partiallyVisible = true) => {
 // HANDLERS
 
 // Add keyboard shortcut for toggling on/off custom style
-function handleKeydown(e) {
+const handleKeydown = (e) => {
   let noModifierKey = !e.altKey && !e.shiftKey && !e.metaKey && !e.ctrlKey;
   let altKeyOnly = e.altKey && !e.shiftKey && !e.metaKey && !e.ctrlKey;
   // let shiftKeyOk = !e.altKey && !e.metaKey && !e.ctrlKey;
@@ -234,10 +234,10 @@ function handleKeydown(e) {
     e.preventDefault();
     return;
   }
-}
+};
 window.addEventListener("keydown", handleKeydown, false);
 
-function newPost() {
+const newPost = () => {
   if (location.pathname !== "/") {
     location.href = "https://t2.social/?compose=true";
   } else {
@@ -248,9 +248,9 @@ function newPost() {
     clickOn(composer);
     composer.focus();
   }
-}
+};
 
-function updateCardAttr() {
+const updateCardAttr = () => {
   const currentAttr = get("main > hr + div:has(> .card)")?.attributes[0]?.name;
   if (currentAttr) {
     cardAttr = currentAttr;
@@ -259,7 +259,7 @@ function updateCardAttr() {
   if (!exists(".focusedCard")) {
     get(cardSelector).classList.add("focusedCard");
   }
-}
+};
 
 // function addCSS(newCss, pos) {
 //   let position = pos ? pos : css.sheet.cssRules.length;
@@ -267,7 +267,7 @@ function updateCardAttr() {
 //   report("CSS added: " + css.sheet.cssRules[position].cssText);
 // }
 
-function goNextPrev(dir) {
+const goNextPrev = (dir) => {
   updateCardAttr();
 
   let currentCard = get(".focusedCard");
@@ -309,12 +309,12 @@ function goNextPrev(dir) {
 
   // Scroll to focused card
   document.documentElement.scrollTo({ top: nextCard.offsetTop - 48, behavior: "smooth" });
-}
+};
 
 // ==========================================================================
 // INIT
 
-function init() {
+const init = () => {
   report("Simplify T2 loaded");
 
   // Add compose button
@@ -328,5 +328,5 @@ function init() {
 
   // Initialize the attribute used to find cards
   updateCardAttr();
-}
+};
 window.addEventListener("load", init, false);
