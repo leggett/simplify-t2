@@ -31,7 +31,7 @@ html.simplify nav.sticky ul.text-sm li:has(> a),
 html.simplify nav.sticky ul.text-sm li:has(> hr) {
   display: none;
 }
-html.simplify nav.sticky .compose {
+html.simplify .compose {
   position: fixed;
   bottom: 88px;
   left: 28px;

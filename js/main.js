@@ -320,7 +320,7 @@ const init = () => {
   // Add compose button
   const composeButton = make("div.compose");
   composeButton.addEventListener("click", newPost);
-  get("nav").appendChild(composeButton);
+  document.body.appendChild(composeButton);
 
   // Add style sheet
   // document.head.appendChild(make("style#simplifyCss", { type: "text/css" }));
