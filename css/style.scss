@@ -1,3 +1,6 @@
+// SELECTORS
+$composerOpen: "> .shadow";
+
 html.simplify {
   // Variables
   --border-radius: 0.5rem;
@@ -18,6 +21,13 @@ html.simplify {
   &::-webkit-scrollbar-track:hover {
     background: rgb(250 251 253);
     border: none;
+  }
+  &[data-theme="dark"]::-webkit-scrollbar-thumb {
+    background-color: #555;
+  }
+  &[data-theme="dark"]::-webkit-scrollbar-track,
+  &[data-theme="dark"]::-webkit-scrollbar-track:hover {
+    background-color: rgb(15, 15, 15);
   }
 
   nav.sticky {
@@ -51,16 +61,18 @@ html.simplify {
     background-repeat: no-repeat;
     background-size: 28px;
     background-position: center;
+    z-index: 49;
   }
 
   // Styles for when compose is open
-  &:has(.relative.mb-3 .z-10) {
+  &:has(.relative.mb-3 #{$composerOpen}) {
     // Don't scroll the page when using compose
     overflow: hidden;
     padding-right: 16px;
 
     // Add padding below the heading to compensate for the composer being gone
     main > h1:first-child {
+      transition: all 0s;
       padding-bottom: 120px;
     }
   }
@@ -81,7 +93,7 @@ html.simplify {
     & > .relative.mb-3:has(textarea) {
       margin-bottom: 48px;
 
-      &:has(.z-10) {
+      &:has(#{$composerOpen}) {
         position: fixed;
         z-index: 11;
         background: #00000080;
@@ -90,14 +102,20 @@ html.simplify {
         top: 0;
         left: 0;
         padding-top: 20vh;
+        margin-top: 0px;
 
-        & > .sticky {
-          max-width: 600px;
+        & > .shadow {
+          max-width: 650px;
           margin: 0 auto;
 
           // Show the post/cancel buttons when compose is in focus
           form .flex.items-center {
             display: flex;
+          }
+
+          // Min height on compose
+          textarea {
+            min-height: 150px;
           }
         }
       }
@@ -112,12 +130,12 @@ html.simplify {
     img.image-aspect.object-cover {
       object-position: top left;
     }
-    .card .overflow-hidden.rounded-2xl:has(img.image-aspect.object-cover) {
+    .hover-light .overflow-hidden.rounded-2xl:has(img.image-aspect.object-cover) {
       border: 1px solid #00000020;
     }
 
     // Restyle posts as cards and add space between them
-    .card {
+    .hover-light {
       margin-bottom: 48px;
       border-radius: var(--border-radius);
       background-color: #ffffff90;
@@ -137,14 +155,14 @@ html.simplify {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
 
-        & ~ div:has(> .card) .card {
+        & ~ div:has(> .hover-light) .hover-light {
           border-top-right-radius: 0;
           border-top-left-radius: 0;
         }
       }
 
       // Has an inline reply
-      & + div:has(.z-10 textarea) {
+      & + div:has(#{$composerOpen} textarea) {
         margin-top: -48px;
         margin-bottom: 48px;
       }
@@ -193,6 +211,12 @@ html.simplify {
     }
   }
 
+  // Mods for dark mode
+  &[data-theme="dark"] main .hover-light {
+    background-color: #1e213190;
+    box-shadow: 0 1px 3px rgba(180, 180, 180, 0.3);
+  }
+
   aside {
     position: fixed;
     right: 0px;
@@ -204,14 +228,17 @@ html.simplify {
 
     &:not(:has(input[placeholder]:focus)):not(:hover) {
       opacity: 1;
-      right: -287px;
+      right: -236px; // -287px;
       // border-left: 1px solid #ccc;
       background-color: transparent;
 
-      .sticky .border {
+      .sticky .search-widget {
         background-color: transparent;
         border-color: transparent;
         box-shadow: none;
+        & > div {
+          margin-right: 30px;
+        }
       }
     }
 
@@ -220,6 +247,7 @@ html.simplify {
       margin-top: 16px;
     }
 
+    // Hide who to follow column
     section.relative.mt-2 {
       display: none;
     }
