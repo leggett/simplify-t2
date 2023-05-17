@@ -241,12 +241,15 @@ const newPost = () => {
   if (location.pathname !== "/") {
     location.href = "https://t2.social/?compose=true";
   } else {
-    const composeOuter = get(".relative.mb-3 > div");
+    // const composeOuter = get(".relative.mb-3 > div");
+    // composeOuter.classList.add("z-10");
     const composer = get(".relative.mb-3 textarea");
+    const scrollPos = document.documentElement.scrollTop;
 
-    composeOuter.classList.add("z-10");
     clickOn(composer);
     composer.focus();
+
+    document.documentElement.scrollTop = scrollPos;
   }
 };
 
