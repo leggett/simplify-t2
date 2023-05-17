@@ -212,7 +212,15 @@ html.simplify {
   }
 
   // Mods for dark mode
-  &[data-theme="dark"] main .hover-light {
+  &[data-theme="dark"] main .hover-light,
+  &[data-theme="dark"] main .hover-light:has(.link-line) + hr + a[href*="status"],
+  &[data-theme="dark"]
+    main
+    .hover-light:has(.link-line)
+    + div.relative
+    + hr
+    + a[href*="status"]
+    a[class*="hover:bg-light-400/25"] {
     background-color: #1e213190;
     box-shadow: 0 1px 3px rgba(180, 180, 180, 0.3);
   }
@@ -248,7 +256,8 @@ html.simplify {
     }
 
     // Hide who to follow column
-    section.relative.mt-2 {
+    &:not(:hover) section.relative.mt-2,
+    &:not(:hover) .sticky section {
       display: none;
     }
   }

@@ -162,7 +162,7 @@ html.simplify main body {
 html.simplify main label {
   display: block;
 }
-html.simplify[data-theme=dark] main .hover-light {
+html.simplify[data-theme=dark] main .hover-light, html.simplify[data-theme=dark] main .hover-light:has(.link-line) + hr + a[href*=status], html.simplify[data-theme=dark] main .hover-light:has(.link-line) + div.relative + hr + a[href*=status] a[class*="hover:bg-light-400/25"] {
   background-color: rgba(30, 33, 49, 0.5647058824);
   box-shadow: 0 1px 3px rgba(180, 180, 180, 0.3);
 }
@@ -190,7 +190,7 @@ html.simplify aside .sticky.bg-white:has(input[placeholder]) {
   background: transparent;
   margin-top: 16px;
 }
-html.simplify aside section.relative.mt-2 {
+html.simplify aside:not(:hover) section.relative.mt-2, html.simplify aside:not(:hover) .sticky section {
   display: none;
 }
 html.simplify .dialog {
