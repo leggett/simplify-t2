@@ -127,10 +127,11 @@ html.simplify {
     }
 
     // Top left align cropped images (easier to make sense of with screenshots)
-    img.image-aspect.object-cover {
+    img.object-cover {
       object-position: top left;
+      max-height: max(400px, 60vh);
     }
-    .hover-light .overflow-hidden.rounded-2xl:has(img.image-aspect.object-cover) {
+    .hover-light .overflow-hidden.rounded-2xl:has(img.object-cover) {
       border: 1px solid #00000020;
     }
 

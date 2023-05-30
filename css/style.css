@@ -101,10 +101,11 @@ html.simplify main > .relative.mb-3:has(textarea):has(> .shadow) > .shadow texta
 html.simplify main > .relative.mb-3:has(textarea) .sticky form .flex.items-center {
   display: none;
 }
-html.simplify main img.image-aspect.object-cover {
+html.simplify main img.object-cover {
   object-position: top left;
+  max-height: max(400px, 60vh);
 }
-html.simplify main .hover-light .overflow-hidden.rounded-2xl:has(img.image-aspect.object-cover) {
+html.simplify main .hover-light .overflow-hidden.rounded-2xl:has(img.object-cover) {
   border: 1px solid rgba(0, 0, 0, 0.1254901961);
 }
 html.simplify main .hover-light {
